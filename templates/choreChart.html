@@ -1,0 +1,25 @@
+<ion-view title="Chore Chart for {{todayDayOftheWeek}}" id="choreChartPage">
+    <ion-content padding="true" class="has-header">
+        <ion-list>
+        <ion-item ng-if="chores.length == 0" class="textCenter">
+            <h4>No chore yet! Keep your house clean today!</h4>
+        </ion-item>
+        <ion-item class="" type="item-text-wrap">
+          <div class="row header">
+                    <div class="col"><b>Name</b></div>
+                    <div class="col"><b>Task</b></div>
+            </div>
+        </ion-item>
+        <ion-item class="" ng-repeat="chore in chores" type="item-text-wrap">
+            <div class="row">
+            <div class = "col">{{chore.handler}} </div>
+            <div class = "col col-33 col-offset-33">{{chore.choreName}}</div>
+            <ion-option-button class="button-assertive" ng-click="remove(chore)">
+                Delete
+            </ion-option-button>
+          </div>
+        </ion-item>
+      </ion-list>
+        <button id="choreChart-buttonAddChore" class="button button-positive  button-block" ui-sref="addChore">Add chore</button>
+    </ion-content>
+</ion-view>

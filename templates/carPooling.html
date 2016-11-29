@@ -1,0 +1,27 @@
+<ion-view title="Car Pooling" id="carPoolingPage">
+    <ion-content padding="true" class="has-header">
+        <form id="carPooling-form6" class="list">
+            <label class="item item-select" >
+                <span class="input-label">Select time</span>
+                <select ng-model="carPoolTime" id="carPoolTime">
+                    <option>0800</option>
+                    <option>0900</option>
+                    <option>1000</option>
+                    <option>1100</option>
+                    <option>1200</option>
+                    <option>1300</option>
+                    <option>1400</option>
+                    <option>1500</option>
+                    <option>1600</option>
+                    <option>1700</option>
+                </select>
+            </label>
+            <label class="item item-date" id="carPooling-selectTime">
+                <span class="input-label">Select date</span>
+                <input type="date" min="{{minDate}}" max="{{maxDate}}" ng-model="carPoolDate" id="carPoolDate">
+            </label>
+        </form>
+        <button id="carPooling-buttonSubmit" class="button button-positive  button-block" ng-click="createPool()">Post to group</button>
+        <button id="carPooling-buttonSubmitStatus" class="button button-neutral  button-block" ui-sref="poolStatus">View your Pool Status</button>
+    </ion-content>
+</ion-view>

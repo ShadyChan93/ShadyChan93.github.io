@@ -1,0 +1,26 @@
+<ion-view view-title="Chat Room">
+    <ion-content>
+            <ion-item class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="IM.textMessage" placeholder="Type in your message...">
+                </label>
+                <button ng-click="sendMessage(IM.textMessage)" class="button button-small button-balanced">
+                    Send
+                </button>
+            </ion-item>
+            <ion-list>
+            <ion-item ng-if="chats.length == 0" class="textCenter">
+                <h4>No messages in this room. Send message to start.</h4>
+            </ion-item>
+            <ion-item class="" ng-repeat="chat in chats" type="item-text-wrap">
+                <h4>{{chat.sender}} :</h4>
+                <span am-time-ago="chat.timestamp" class="item-note">
+                </span>
+                <p>{{chat.msgContent}}</p>
+                <ion-option-button class="button-assertive" ng-click="remove(chat)">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+          </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,28 @@
+<ion-view title="Add Chore" id="addChorePage">
+    <ion-content padding="true" class="has-header">
+        <form id="addChore-form9" class="list">
+            <label class="item item-input item-select" id="addChore-textarea10">
+                <span class="input-label">Name</span>
+                <select id="handler" ng-model="handler" ng-options="user.userName for user in users">
+              </select>
+            </label>
+            <label class="item item-input" id="addChore-textarea11">
+                <span class="input-label">Task</span>
+                <input type="text" ng-model="choreName" placeholder="So what to do on this day?">
+            </label>
+            <label class="item item-input item-select" id="addChore-select4">
+                <span class="input-label">Day</span>
+                <select ng-model="day">
+                <option value="Monday" >Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </label>
+        </form>
+        <button id="addChore-button28" class="button button-positive  button-block" ng-click=createChore(handler,choreName,day) >Submit</button>
+    </ion-content>
+</ion-view>

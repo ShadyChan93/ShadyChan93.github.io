@@ -1,0 +1,69 @@
+<ion-view title="Shopping list" id="shoppingListPage">
+    <ion-content padding="true" class="has-header">
+      <form name="todoForm">
+        <div class="list">
+
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text"
+               id= "itemName"
+               name="itemNameField"
+               ng-model="itemName"
+               placeholder="Add new task (min 3 chars)"
+               required ng-minlength="3"
+               class="form-control"
+               ng-keyup="($event.keyCode == 13 && itemName.length > 2) ? addItem() : return"
+               style="margin-bottom: 10px"
+                />
+      </label>
+      <button ng-click="addItem()"
+              ng-hide="myForm.itemNameField.$invalid"
+              class="button button-small" type="button"
+              >Save Item
+      </button>
+
+    </div>
+
+  </div>
+      </form>
+      <hr />
+
+      <ion-list>
+        <ion-item class="" type="item-text-wrap">
+          <div class="row header">
+                    <div class="col"><b>Name</b></div>
+                    <div class="col"><b>Status</b></div>
+            </div>
+        </ion-item>
+      <ion-item ng-show="(items | filter:{status: 'pending'}).length" ng-repeat="item in items | filter:{status: 'pending'}"
+           class="" type="item-text-wrap">
+           <div class="row ">
+          <div class="col col-33">
+            <span>{{item.itemName}}</span>
+          </div>
+          <div class="col col-33 col-offset-33">
+              <span>{{item.status}}</span>
+          </div>
+          </div>
+          <ion-option-button class="button-balanced" ng-click="completeItem($index, item)">
+              Complete
+          </ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="removeItem($index, item)">
+              Delete
+          </ion-option-button>
+
+      </ion-item>
+      <ion-item ng-show="(items | filter:{status: 'completed'}).length" ng-repeat="item in items | filter:{status: 'completed'}"
+           class="row list-item" type="item-text-wrap">
+          <div class="col">
+            <i class="icon ion-checkmark-round"></i>
+            <span>{{item.itemName}}</span>
+          </div>
+          <div class="col ">
+            <span>Completed by : </span>
+            <span>{{item.completedBy}}</span>
+          </div>
+        </ion-item>
+    </ion-list>
+    </ion-content>
+</ion-view>

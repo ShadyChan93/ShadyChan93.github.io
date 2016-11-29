@@ -1,0 +1,26 @@
+<ion-view title="Expense" id="expensePage">
+    <ion-content padding="true" class="has-header">
+        <div class="list card" id="expense-card1">
+            <div class="item item-divider">Expense summary</div>
+            <div class="item item-body">
+              <div class ="row">
+              <div class ="col"><h3>Group expense this month </h3></div>
+              <div class ="col col-33"><h2>: RM {{currentExpense}}</h2></div>
+            </div>
+            <div class ="row">
+            <div class ="col"><h3>You have contributed </h3></div>
+            <div class ="col col-33"><h2>:RM {{userContribution}}</h2></div>
+          </div>
+          <div class ="row">
+          <div class ="col"><h3>Your current balance </h3></div>
+          <div class ="col col-33"><h2>: RM {{userBalance}}</h2></div>
+        </div>
+
+            </div>
+        </div>
+        <button id="expense-buttonAddexpense" class="button button-positive  button-block" ui-sref="addExpense">Add expense</button>
+        <button id="expense-buttonChangeExpense" class="button button-positive  button-block" ui-sref="changeExpense">View own contribution</button>
+        <button id="expense-buttonViewExpense" class="button button-balanced  button-block" ui-sref="viewExpense" >View All Expense</button>
+        <button id="expense-buttonMakePayment" class="button button-positive  button-block" ui-sref="makePayment">Make payment</button>
+    </ion-content>
+</ion-view>

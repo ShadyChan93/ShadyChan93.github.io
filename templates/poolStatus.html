@@ -1,0 +1,18 @@
+<ion-view title="Pool Status for {{poolDate}}" id="poolStatusPage">
+    <ion-content padding="true" class="has-header">
+        <ion-list >
+          <ion-item >
+          <div>
+              <span>Time : {{poolTime}}</span>
+        </div>
+          </ion-item>
+          <ion-item>
+          <span>Passenger </span>
+        </ion-item>
+        <ion-item class="" ng-repeat="passenger in passengers" type="item-text-wrap">
+            <span>{{passenger.passengerName}} </span>
+        </ion-item>
+      </ion-list>
+        <button id="carPooling-buttonNoted" class="button button-positive  button-block" ui-sref="carPooling">Noted</button>
+    </ion-content>
+</ion-view>

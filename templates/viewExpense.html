@@ -1,0 +1,23 @@
+<ion-view title="Expense for {{month}}" id="viewExpensePage">
+    <ion-content padding="true" class="has-header">
+        <ion-list>
+        <ion-item ng-if="expenses.length == 0" class="textCenter">
+            <h4>Wow, you spend nothing!</h4>
+        </ion-item>
+      <ion-item class=""  type="item-text-wrap">
+        <div class="row header">
+                  <div class="col"><b>Name</b></div>
+                  <div class="col"><b>Price (RM)</b></div>
+                  <div class="col"><b>Paid by</b></div>
+          </div>
+      </ion-item>
+        <ion-item class=""  type="item-text-wrap">
+            <div class="row" ng-repeat="expense in expenses">
+            <div class="col">{{expense.expenseName}} </div>
+            <div class="col">{{expense.expenseAmount}}</div>
+            <div class="col">{{expense.expenseCreditor}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-view>

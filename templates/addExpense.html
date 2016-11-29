@@ -1,0 +1,23 @@
+<ion-view title="Add expense" id="addExpensePage">
+    <ion-content padding="true" class="has-header">
+        <form id="addExpense-form10" class="list">
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month" ng-model="addExpense_inputMonthYear" id="addExpense-inputMonthYear">
+          </label>
+        </form>
+        <form id="addExpense-form12" class="list">
+            <label class="item item-input" >
+                <span class="input-label">Expense name</span>
+                <input type="text" placeholder="" ng-model="addExpense_inputExpenseName" id="addExpense-inputExpenseName" >
+            </label>
+        </form>
+        <form id="addExpense-form13" class="list">
+            <label class="item item-input" >
+                <span class="input-label">Amount</span>
+                <input type="number" placeholder="" ng-model="addExpense_inputExpenseAmount" id="addExpense-inputExpenseAmount">
+            </label>
+        </form>
+        <button id="addExpense-buttonSubmit" ng-click="createExpense()" class="button button-positive  button-block">Submit</button>
+    </ion-content>
+</ion-view>

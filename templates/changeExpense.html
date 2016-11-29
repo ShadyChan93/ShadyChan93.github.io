@@ -1,0 +1,24 @@
+<ion-view title="Expense for {{month}}" id="changeExpensePage">
+    <ion-content padding="true" class="has-header">
+        <ion-list>
+        <ion-item ng-if="expenses.length == 0" class="textCenter">
+            <h4>Wow, you spend nothing!</h4>
+        </ion-item>
+        <ion-item class="" type="item-text-wrap">
+        <div class="row header">
+                  <div class="col"><b>Name</b></div>
+                  <div class="col"><b>Price (RM)</b></div>
+          </div>
+        </ion-item>
+        <ion-item class="" ng-repeat="expense in expenses" type="item-text-wrap">
+            <div class="row" >
+            <div class="col">{{expense.expenseName}} </div>
+            <div class="col">{{expense.expenseAmount}}</div>
+            <ion-option-button class="button-assertive" ng-click="removeExpense($index,expense)">
+                Delete
+            </ion-option-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-view>
