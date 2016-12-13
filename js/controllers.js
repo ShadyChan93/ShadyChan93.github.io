@@ -212,6 +212,7 @@ angular.module('iamsam.controllers', ['firebase'])
                   var driverID = snapshot.child('driverId').val();
                   firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+driverID+'/pools/'+key+'/status').set("Expired");
                   firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+driverID+'/currentPool').set(null);
+                  firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+$rootScope.userId+'/currentJoinedPool').set(null);
                   console.log("Change status to expired");
                 });
             }
@@ -241,10 +242,12 @@ angular.module('iamsam.controllers', ['firebase'])
        ref.once("value")
        .then(function(snapshot) {
        var quantity = snapshot.child("poolQuantity").val();
+       var driver = snapshot.child("driverId").val();
        console.log("poolQuantity:"+quantity);
        if(quantity < 4){
          firebase.database().ref('carPooling/'+ $rootScope.groupCode+'/'+$rootScope.userId +'/currentJoinedPool').set(pool.$id);
          firebase.database().ref('carPooling/'+ $rootScope.groupCode+'/publicPool/'+pool.$id+'/poolQuantity').set(quantity + 1);
+         firebase.database().ref('carPooling/'+ $rootScope.groupCode+'/'+driver+'/pools/'+pool.$id+'/poolQuantity').set(quantity + 1);
          console.log("quantity :"+quantity);
          var ref = firebase.database().ref("carPooling/"+ $rootScope.groupCode +'/publicPool/'+pool.$id);
          ref.once("value")
@@ -569,6 +572,34 @@ angular.module('iamsam.controllers', ['firebase'])
         var ref = firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+$rootScope.userId+'/pools');
         $scope.pools = $firebaseArray(ref);
       });
+
+})
+
+.controller('poolStatus2Ctrl', function ($scope,$ionicPopup, $state,$rootScope,$firebaseArray,$timeout) {
+    //console.log("Rooms Controller initialized");
+    var query = firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+$rootScope.userId);
+    query.once("value")
+      .then(function(snapshot) {
+        var currentpool = snapshot.child('currentJoinedPool').val();
+        console.log('currentpool :'+currentpool);
+        var query1 = firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/publicPool/'+currentpool);
+        query1.once("value")
+          .then(function(snapshot) {
+            $scope.poolTime = snapshot.child('poolTime').val();
+            $scope.poolDate = snapshot.child('poolDate').val();
+            $scope.driverName = snapshot.child('driverName').val();
+            $scope.status = snapshot.child('status').val();
+            $scope.poolQuantity = snapshot.child('poolQuantity').val();
+            console.log("pooltime:"+$scope.poolTime);
+            console.log("pooldate:"+$scope.poolDate);
+            console.log("driverName:"+$scope.driverName);
+            console.log("status:"+$scope.status);
+            console.log("quantity:"+$scope.poolQuantity);
+
+
+          });
+      });
+
 })
 
 
@@ -607,6 +638,8 @@ angular.module('iamsam.controllers', ['firebase'])
       $scope.currentExpense = parseFloat(snapshot.child("currentExpense").val().toFixed(2));
       console.log("current expense: " +$scope.currentExpense);
       if(snapshot.child($rootScope.userId).exists()){
+        var userBalance = parseFloat(($scope.currentExpense/$rootScope.groupQuantity).toFixed(2));
+        firebase.database().ref('totalExpenses/'+ $rootScope.groupCode+'/'+month+'/'+$rootScope.userId +'/userBalance').set(userBalance);
         $scope.userContribution = snapshot.child($rootScope.userId).child("userContribution").val();
         $scope.userBalance = snapshot.child($rootScope.userId).child("userBalance").val();
         $scope.$apply();

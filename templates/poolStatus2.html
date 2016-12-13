@@ -1,0 +1,25 @@
+<ion-view title="Current Joined Pool Status for {{poolDate}}" id="poolStatus2Page">
+    <ion-content padding="true" class="has-header">
+        <ion-list >
+          <ion-item>
+            <div class="row">
+              <div class="col">Driver Name</div>
+              <div class="col">{{driverName}}</div>
+            </div>
+            <div class="row">
+              <div class="col">Pool Time</div>
+              <div class="col">{{poolTime}}</div>
+            </div>
+            <div class="row">
+              <div class="col">Pool Quantity</div>
+              <div class="col">{{poolQuantity}}</div>
+            </div>
+            <div class="row">
+              <div class="col">Status</div>
+              <div class="col">{{status}}</div>
+            </div>
+          </ion-item>
+      </ion-list>
+        <button id="carPooling-buttonNoted" class="button button-positive  button-block" ui-sref="carPooling">Noted</button>
+    </ion-content>
+</ion-view>

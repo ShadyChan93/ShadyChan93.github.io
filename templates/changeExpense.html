@@ -7,13 +7,13 @@
         <ion-item class="" type="item-text-wrap">
         <div class="row header">
                   <div class="col"><b>Name</b></div>
-                  <div class="col"><b>Price (RM)</b></div>
+                  <div class="col"><b>Price</b></div>
           </div>
         </ion-item>
         <ion-item class="" ng-repeat="expense in expenses" type="item-text-wrap">
             <div class="row" >
             <div class="col">{{expense.expenseName}} </div>
-            <div class="col">{{expense.expenseAmount}}</div>
+            <div class="col">RM {{expense.expenseAmount}}</div>
             <ion-option-button class="button-assertive" ng-click="removeExpense($index,expense)">
                 Delete
             </ion-option-button>

@@ -3,19 +3,19 @@
         <form id="addExpense-form10" class="list">
           <label class="item item-input">
             <span class="input-label">Month</span>
-            <input type="month" ng-model="addExpense_inputMonthYear" id="addExpense-inputMonthYear">
+            <input type="month" ng-model="addExpense_inputMonthYear" id="addExpense-inputMonthYear" required>
           </label>
         </form>
         <form id="addExpense-form12" class="list">
             <label class="item item-input" >
                 <span class="input-label">Expense name</span>
-                <input type="text" placeholder="" ng-model="addExpense_inputExpenseName" id="addExpense-inputExpenseName" >
+                <input type="text" placeholder="" ng-model="addExpense_inputExpenseName" id="addExpense-inputExpenseName" required>
             </label>
         </form>
         <form id="addExpense-form13" class="list">
             <label class="item item-input" >
                 <span class="input-label">Amount</span>
-                <input type="number" placeholder="" ng-model="addExpense_inputExpenseAmount" id="addExpense-inputExpenseAmount">
+                <input type="number" placeholder="" ng-model="addExpense_inputExpenseAmount" min="0" max="1500" id="addExpense-inputExpenseAmount" required>
             </label>
         </form>
         <button id="addExpense-buttonSubmit" ng-click="createExpense()" class="button button-positive  button-block">Submit</button>

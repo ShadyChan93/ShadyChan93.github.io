@@ -9,7 +9,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // 'iamsam.services' is found in services.js
 // 'iamsam.controllers' is found in controllers.js
-angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.controllers'])
+angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.controllers','firebase'])
 
 .run(function ($ionicPlatform, $rootScope, $location, Auth, $ionicLoading) {
     $ionicPlatform.ready(function () {
@@ -39,11 +39,11 @@ angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.co
         });
 
         $rootScope.logout = function () {
+            firebase.database().ref('groups/' + $rootScope.groupCode + '/groupMembers/'+ $rootScope.userId+'/isOnline').set("offline");
             console.log("Logging out from the app");
             $ionicLoading.show({
                 template: 'Logging Out...'
             });
-            firebase.database().ref('groups/' + $rootScope.groupCode + '/groupMembers/'+ $rootScope.userId+'/isOnline').set("offline");
             Auth.$signOut();
         }
 
@@ -108,6 +108,12 @@ angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.co
       url: '/poolStatus',
       templateUrl: 'templates/poolStatus.html',
       controller: 'poolStatusCtrl'
+    })
+
+    .state('poolStatus2', {
+      url: '/poolStatus2',
+      templateUrl: 'templates/poolStatus2.html',
+      controller: 'poolStatus2Ctrl'
     })
 
     .state('choreChart', {
