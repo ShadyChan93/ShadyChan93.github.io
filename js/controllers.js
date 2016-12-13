@@ -270,17 +270,17 @@ angular.module('iamsam.controllers', ['firebase'])
     //console.log("Rooms Controller initialized");
     $scope.removeUser = function(){
       var month = moment().format('YYYY-MM');
-      var ref = firebase.database().ref("groups/"+ $rootScope.groupCode +'/'+month +'/'+$rootScope.userId);
+      var ref= firebase.database().ref("totalExpenses/"+ $rootScope.groupCode +'/'+month +'/'+$rootScope.userId);
       ref.once("value")
       .then(function(snapshot) {
-      var contribution = parseFloat(snapshot.child("userContribution").val());
-      var balance = parseFloat(snapshot.child("userBalance").val());
+      //var contribution = parseFloat(snapshot.child("userContribution").val());
+      var balance = snapshot.child("userBalance").val();
+      console.log("balance: "+balance);
       if(balance > 0){
         var alertPopup = $ionicPopup.alert({
      title: 'Alert Invalid Balance',
      template: 'You currently still owes to the group. Please ensure your balance is less than 0 for leaving group.'
    });
-
    alertPopup.then(function(res) {
      console.log('Remove user cancelled due to invalid balance');
    });
