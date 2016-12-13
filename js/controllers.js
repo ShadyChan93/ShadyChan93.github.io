@@ -449,7 +449,7 @@ angular.module('iamsam.controllers', ['firebase'])
                 });
               alert("Done update!");
               $ionicLoading.hide();
-
+              $state.go('expense');
           } else
               alert("Please fill all details");
               $ionicLoading.hide();
@@ -765,7 +765,7 @@ angular.module('iamsam.controllers', ['firebase'])
           creatorID: $rootScope.userId,
           completedBy:'none'
       });
-
+      document.getElementById('itemName').value = "";
       $scope.itemName = "";
 
   };
