@@ -638,9 +638,10 @@ angular.module('iamsam.controllers', ['firebase'])
       $scope.currentExpense = parseFloat(snapshot.child("currentExpense").val().toFixed(2));
       console.log("current expense: " +$scope.currentExpense);
       if(snapshot.child($rootScope.userId).exists()){
-        var userBalance = parseFloat(($scope.currentExpense/$rootScope.groupQuantity).toFixed(2));
-        firebase.database().ref('totalExpenses/'+ $rootScope.groupCode+'/'+month+'/'+$rootScope.userId +'/userBalance').set(userBalance);
         $scope.userContribution = snapshot.child($rootScope.userId).child("userContribution").val();
+        var userBalance = parseFloat((($scope.currentExpense/$rootScope.groupQuantity)-$scope.userContribution).toFixed(2));
+        console.log("userBalance:" + userBalance);
+        firebase.database().ref('totalExpenses/'+ $rootScope.groupCode+'/'+month+'/'+$rootScope.userId +'/userBalance').set(userBalance);
         $scope.userBalance = snapshot.child($rootScope.userId).child("userBalance").val();
         $scope.$apply();
       }
