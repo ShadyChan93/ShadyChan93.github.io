@@ -210,7 +210,7 @@ angular.module('iamsam.controllers', ['firebase'])
               ref.once("value")
                 .then(function(snapshot) {
                   var driverID = snapshot.child('driverId').val();
-                  firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+driverID+'/'+key+'/status').set("Expired");
+                  firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+driverID+'/pools/'+key+'/status').set("Expired");
                   firebase.database().ref('carPooling/'+ $rootScope.groupCode +'/'+driverID+'/currentPool').set(null);
                   console.log("Change status to expired");
                 });
@@ -327,7 +327,6 @@ angular.module('iamsam.controllers', ['firebase'])
         alert("Remove user success");
      } else {
        console.log('Remove user cancelled by user');
-       alert("Remove user cancelled");
      }
    });
       }
@@ -581,9 +580,17 @@ angular.module('iamsam.controllers', ['firebase'])
     $scope.todayDayOftheWeek = weekDays[today];
     var ref = firebase.database().ref('chores/'+ $rootScope.groupCode +'/'+$scope.todayDayOftheWeek);
     $scope.chores = $firebaseArray(ref);
+    $scope.remove = function (chore) {
+        $scope.chores.$remove(chore).then(function (ref) {
+            ref.key === chore.$id; // true item has been removed
+            console.log("chore deleted");
+        });
+      }
+
     $timeout(function(){
                     $scope.$apply();
                 });
+
 })
 
 .controller('expenseCtrl', function ($scope, $state,$rootScope,$firebaseArray) {
@@ -692,9 +699,8 @@ angular.module('iamsam.controllers', ['firebase'])
     //var database = firebase.database();
     Auth.$onAuthStateChanged(function(user) {
           // User is signed in.
-          var uid = user.uid;
           //console.log("can see this or not?" + uid);
-          var ref = firebase.database().ref("users/"+ uid);
+          var ref = firebase.database().ref("users/"+ $rootScope.userId);
           ref.once("value")
           .then(function(snapshot) {
             var displayName = snapshot.child("displayName").val();
@@ -728,6 +734,7 @@ angular.module('iamsam.controllers', ['firebase'])
               firebase.database().ref('users/'+ userId + '/matric').set(user_matric);
               firebase.database().ref('users/'+ userId + '/ic').set(user_ic);
               firebase.database().ref('users/'+ userId + '/carplate').set(user_carplate);
+              firebase.database().ref('groups/'+$rootScope.groupCode+'/groupMembers/'+userId+'/userName').set(user_displayName);
               alert("Done update!");
               $ionicLoading.hide();
           } else

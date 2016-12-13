@@ -9,10 +9,15 @@
                 </button>
             </ion-item>
             <ion-list>
+            <ion-item>
+              <button class="button icon-left ion-bag button-block button-energized" ui-sref="shoppingList">
+                Shopping List
+              </button>
+            </ion-item>
             <ion-item ng-if="chats.length == 0" class="textCenter">
                 <h4>No messages in this room. Send message to start.</h4>
             </ion-item>
-            <ion-item class="" ng-repeat="chat in chats" type="item-text-wrap">
+            <ion-item class="" ng-repeat="chat in chats|orderBy:'-timestamp':reverse" type="item-text-wrap">
                 <h4>{{chat.sender}} :</h4>
                 <span am-time-ago="chat.timestamp" class="item-note">
                 </span>

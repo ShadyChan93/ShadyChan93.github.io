@@ -63,7 +63,11 @@
             <span>Completed by : </span>
             <span>{{item.completedBy}}</span>
           </div>
+          <ion-option-button class="button-assertive" ng-click="removeItem($index, item)">
+              Delete
+          </ion-option-button>
         </ion-item>
+
     </ion-list>
     </ion-content>
 </ion-view>

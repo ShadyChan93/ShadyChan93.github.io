@@ -26,7 +26,7 @@ angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.co
         ionic.Platform.fullScreen();
 
         //$rootScope.firebaseUrl = firebaseUrl;
-        $rootScope.displayName = null;
+        //$rootScope.displayName = null;
 
         Auth.$onAuthStateChanged(function (user) {
             if (user) {
@@ -43,7 +43,7 @@ angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.co
             $ionicLoading.show({
                 template: 'Logging Out...'
             });
-            firebase.database().ref('groups/' + $rootScope.groupCode + '/groupMembers/'+ $rootScope.userId+'/'+'isOnline').set("offline");
+            firebase.database().ref('groups/' + $rootScope.groupCode + '/groupMembers/'+ $rootScope.userId+'/isOnline').set("offline");
             Auth.$signOut();
         }
 
@@ -74,24 +74,6 @@ angular.module('iamsam', ['ionic','angularMoment', 'iamsam.services', 'iamsam.co
     })
 
 
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-        url: "/tab",
-        abstract: true,
-        templateUrl: "templates/tabs.html",
-        resolve: {
-            // controller will not be loaded until $requireAuth resolves
-            // Auth refers to our $firebaseAuth wrapper in the example above
-            "currentAuth": ["Auth",
-                function (Auth) {
-                    // $requireAuth returns a promise so the resolve waits for it to complete
-                    // If the promise is rejected, it will throw a $stateChangeError (see above)
-                    return Auth.$requireSignIn();
-      }]
-        }
-    })
-
-    // Each tab has its own nav history stack:
     .state('mainPage', {
         url: '/mainPage',
         templateUrl: 'templates/mainPage.html',
